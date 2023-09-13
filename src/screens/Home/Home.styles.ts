@@ -28,5 +28,7 @@ export const BodyText = styled.Text`
     color: ${theme.colors['gray-700']};
   `}`;
 
+ 
+
   
 
