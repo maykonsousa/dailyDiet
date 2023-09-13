@@ -1,0 +1,1 @@
+export {DashboardResume} from './DashboardResume'

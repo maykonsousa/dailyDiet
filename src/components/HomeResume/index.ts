@@ -1,0 +1,1 @@
+export {HomeResume} from './HomeResume'

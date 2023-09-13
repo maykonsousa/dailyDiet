@@ -44,5 +44,6 @@ export const DetailButton = styled.TouchableOpacity`
 export const DetailIcon = styled(ArrowUpRight).attrs(({ theme }) => ({
     size: 24,
     color: theme.colors['green-dark'],
+    weight: 'bold'
 
 }))``;

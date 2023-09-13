@@ -4,6 +4,6 @@ export interface MealDTO {
     description: string,
     date: string,
     hour: string,
-    onHealthyDiet: boolean,
+    onHealthyDiet: 'yes' | 'no' | null,
 
 };

@@ -9,16 +9,21 @@ interface OptionsSelectProps {
 
 interface SelectProps {
   options: OptionsSelectProps[];
+  placeholder?: string;
   onChange: (value: string) => void;
 }
 
-export const Select = ({onChange, options}:SelectProps) => {
+export const Select = ({onChange, options, placeholder}:SelectProps) => {
+  const initialOption = placeholder ?? options[0].label
   const [show, setShow] = React.useState(false)
-  const [option, setOption] = React.useState(options[0].label)
+  const [option, setOption] = React.useState<string>(initialOption)
 
 
   const handleOpenModal = (e: GestureResponderEvent ) => {
-    setShow(true)
+    if(options.length > 0) {
+      setShow(true)
+    }
+
   }
 
   const handleCloseModal = () => {
