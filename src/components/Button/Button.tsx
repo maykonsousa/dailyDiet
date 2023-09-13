@@ -13,7 +13,7 @@ interface ButtonProps extends TouchableOpacityProps {
 }
 
 
-export const Button = ({variant, iconName, label }:ButtonProps) => {
+export const Button = ({variant, iconName, label, onPress }:ButtonProps) => {
     const theme = useTheme()
     const renderIcon = () => {
         switch (iconName) {
@@ -51,7 +51,7 @@ export const Button = ({variant, iconName, label }:ButtonProps) => {
     }
    
   return (
-    <ButtonContainer variant={variant}>
+    <ButtonContainer variant={variant} onPress={onPress}>
         {renderIcon()}
 
         {variant === 'contained' ? (
