@@ -36,14 +36,15 @@ export const AddMealTitle = styled.Text`
     `}
 `;
 
-export const TimeContainer = styled.View`
+export const GridContainer = styled.View`
     width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-top: 16px;
 `;
 
-export const TimeInputContainer = styled.View`
+export const GridItemContainer = styled.View`
     width: 48%;
 `;
 
@@ -53,10 +54,40 @@ export const BackButton = styled.TouchableOpacity`
     left: 24px;
 `;
 
+export const Label = styled.Text`
+    ${({ theme }) => css`
+        font-size: ${theme.font_sizes.sm_14}px;
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors['gray-700']};
+        margin-bottom: 4px;
+        width: 100%;
+        text-align: left;
+    `}
+`;
+
+export const LabelError = styled.Text`
+    ${({ theme }) => css`
+        font-size: ${theme.font_sizes.xs_12}px;
+        font-family: ${theme.fonts.regular};
+        color: ${theme.colors['red-dark']};
+    `}
+    width: 100%;
+    text-align: left;   
+`;
+
+export const FlexSpacing = styled.View`
+    width: 100%;
+    flex:1;
+`;
+
+
+
 export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
     size: 24,
     color: theme.colors['gray-700'],
     weight: 'bold'
 
 }))``;
+
+
 

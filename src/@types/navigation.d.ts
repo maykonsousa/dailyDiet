@@ -6,6 +6,9 @@ export declare global {
             home: undefined;
             dashboard: undefined;
             addmeal: undefined;
+            feedback: {
+                meal_id: string;
+            }
          
         }
     }
