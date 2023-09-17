@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { BodyText, HomeContainer, HomeContent, LogoImage } from './Home.styles'
 import Logo from '@assets/logo.png'
 import { HomeResume } from '@components/HomeResume'
@@ -7,18 +7,65 @@ import { Select } from '@components/Select'
 import { MealItem } from '@components/MealItem'
 import { FlatList } from 'react-native'
 import { MealMock } from '@storage/mocks'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { getDatesList } from '@storage/getDatesList.service'
+import { getMealsByDate } from '@storage/GetMealsByDate.service'
+import { MealDTO, ResumeDTO } from '@storage/DTOs'
+import { getResume } from '@storage/getResume.service'
 
 
 
 
 export const Home = () => {
   const [dateSelected, setDateSelected] = React.useState('' as string)
+  const [datesList, setDatesList] = React.useState<string[]>([] )
+  const [meals, setMeals] = React.useState<MealDTO[]>([] )
+  const [resume, setResume] = React.useState<ResumeDTO>({} as ResumeDTO)
+  
+ const getDates = async () => {
+  try {
+    const dates = await getDatesList()
+    setDatesList(dates)
+    if(dates.length > 0) setDateSelected(dates[0])
+  } catch (error) {
+    console.log(error)
+  }
+ }
+
+ const getMeals = async () => {
+  try {
+    const mealsData = await getMealsByDate(dateSelected)
+    setMeals(mealsData)
+  } catch (error) {
+    console.log(error)
+  }
+ }
+
+ const getResumeData = async() => {
+    try {
+      const resumeData = await getResume()
+      setResume(resumeData)
+    } catch (error) {
+      console.log(error)
+    }
+ }
+
+  useFocusEffect(useCallback(()=>{
+    getDates()
+    getResumeData()
+  },[]))
+
+  useEffect(()=>{
+    getMeals()
+  },[dateSelected])
+
+  const comboOptios = datesList.map((date) => ({value: date, label: date}))
+
   const {navigate} = useNavigation()
   return (
     <HomeContainer>
         <LogoImage source={Logo} />
-        <HomeResume />
+        <HomeResume percentageMealsDiet={resume.percentageMealsDiet} />
         <HomeContent>
         <BodyText>Refeições</BodyText>
         <Button 
@@ -27,26 +74,15 @@ export const Home = () => {
         onPress={()=>navigate('addmeal')}
         iconName='add'/>
         <Select 
-        placeholder="Selecione a Data"
-          options={[
-            {value: '10/09/23', label: '10/09/23'},
-            {value: '09/09/23', label: '09/09/23'},
-            {value: '08/09/23', label: '08/09/23'},
-            {value: '07/09/23', label: '07/09/23'},
-            {value: '06/09/23', label: '06/09/23'},
-            {value: '05/09/23', label: '05/09/23'},
-            {value: '04/09/23', label: '04/09/23'},
-            {value: '03/09/23', label: '03/09/23'},
-            {value: '02/09/23', label: '02/09/23'},
-            {value: '01/09/23', label: '01/09/23'},
-            
-          ]}
+          options={comboOptios}
           onChange={(value) => setDateSelected(value)}
         />
         <FlatList 
-          data={MealMock}
+          data={meals}
           renderItem={({item}) => <MealItem meal={item}/>}
           keyExtractor={(item) => `${item.id}`}
+          ListEmptyComponent={() => <BodyText>Nenhuma refeição cadastrada</BodyText>}
+         
         />
         </HomeContent>
     </HomeContainer>

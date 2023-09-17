@@ -7,7 +7,7 @@ interface IProps extends SafeAreaProviderProps{
 
 export const DashBoardContainer = styled(SafeAreaView)<IProps>`
     flex: 1;
-    background-color: ${({ theme, isSuccess }) => isSuccess ? theme.colors["green-dark"] : theme.colors["red-mid"]};
+    background-color: ${({ theme, isSuccess }) => isSuccess ? theme.colors["green-mid"] : theme.colors["red-mid"]};
     align-items: center;
 
 

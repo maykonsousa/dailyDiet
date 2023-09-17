@@ -1,12 +1,16 @@
 import { ArrowUpRight } from "phosphor-react-native";
 import styled, {css} from "styled-components/native";
 
+interface ResumeContainerProps {
+    isSuccess: boolean;
+}
 
-export const ResumeContainer = styled.View`
+
+export const ResumeContainer = styled.View<ResumeContainerProps>`
     width: 100%;
     padding: 20px 16px;
     position: relative;
-    background-color: ${({ theme }) => theme.colors["green-light"]};
+    background-color: ${({ theme, isSuccess }) => isSuccess ? theme.colors['green-light'] : theme.colors['red-light']};
     align-items: center;
     justify-content: center;
     border-radius: 6px;

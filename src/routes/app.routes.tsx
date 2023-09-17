@@ -3,6 +3,7 @@ import { Home } from "@screens/Home";
 import { DashBoard } from "@screens/DashBoard";
 import { AddMeal } from "@screens/AddMeal";
 import { Feedback } from "@screens/Feedback";
+import { Detail } from "@screens/Detail";
 
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -22,6 +23,7 @@ export const AppRoutes = () => {
             <Screen name="dashboard" component={DashBoard} />
             <Screen name="addmeal" component={AddMeal} />
             <Screen name="feedback" component={Feedback} />
+            <Screen name="detail" component={Detail} />
         </Navigator>
     )
 }

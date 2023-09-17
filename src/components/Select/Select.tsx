@@ -1,6 +1,6 @@
 import React from 'react'
 import { CloseButton, CloseIcon, Divisor, OptionContent, OptionHeader, OptionItem, OptionText, OptionsModal, Overlay, SelectIcon, SelectInput, SelectText } from './Select.styles'
-import { FlatList, GestureResponderEvent, View } from 'react-native'
+import { FlatList } from 'react-native'
 
 interface OptionsSelectProps {
   value: string;
@@ -9,17 +9,18 @@ interface OptionsSelectProps {
 
 interface SelectProps {
   options: OptionsSelectProps[];
-  placeholder?: string;
   onChange: (value: string) => void;
 }
 
-export const Select = ({onChange, options, placeholder}:SelectProps) => {
-  const initialOption = placeholder ?? options[0].label
+export const Select = ({onChange, options}:SelectProps) => {
+  
   const [show, setShow] = React.useState(false)
-  const [option, setOption] = React.useState<string>(initialOption)
+  const [option, setOption] = React.useState<string>('')
+
+ 
 
 
-  const handleOpenModal = (e: GestureResponderEvent ) => {
+  const handleOpenModal = ( ) => {
     if(options.length > 0) {
       setShow(true)
     }
@@ -36,7 +37,10 @@ export const Select = ({onChange, options, placeholder}:SelectProps) => {
     setShow(false)
   }
 
- 
+  React.useEffect(()=>{
+    if(options.length > 0 && !option) setOption(options[0].label)
+
+  },[options])
   return (
     <>
     <SelectInput onPress={handleOpenModal}>

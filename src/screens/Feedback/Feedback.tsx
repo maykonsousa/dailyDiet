@@ -4,30 +4,16 @@ import { FeedBackImage, FeedbackContainer, FeedbackText, FeedbackTitle } from '.
 import FeedbackSuccessImg from '@assets/feedbackSuccess.png'
 import FeedbackFailImg from '@assets/feedbackFail.png'
 import { Button } from '@components/Button'
-import { MealDTO } from '@storage/DTOs'
-import { useFocusEffect } from '@react-navigation/native'
+import {  useNavigation, useRoute } from '@react-navigation/native'
 
 export const Feedback = () => {
-const [mealSelected, setMealSelected] = React.useState<MealDTO | null>(null);
+const router = useRoute()
+const {navigate} = useNavigation()
+const {is_meal_diet} = router.params as {is_meal_diet: 'yes' | 'no' }
 
-const mealMock:MealDTO = {
-    id: '12345',
-    name: 'Arroz com feijão',
-    description: 'Arroz com feijão e bife',
-    date: '10/10/2021',
-    hour: '12:00',
-    onHealthyDiet: 'yes',
-} as MealDTO
+const isSuccessFeedback = is_meal_diet === 'yes'
 
-const isSuccessFeedback = mealSelected?.onHealthyDiet === 'yes';
 
-useFocusEffect(useCallback(() => {
-    setMealSelected(mealMock)
-    return () => {
-        setMealSelected(null)
-    }
-}, [])
-);
 
   return (
     <FeedbackContainer>
@@ -36,7 +22,7 @@ useFocusEffect(useCallback(() => {
         </FeedbackTitle>
         <FeedbackText>{isSuccessFeedback?'Você continua dentro da dieta. Muito bem!':'Você saiu da dieta dessa vez, mas continue se esforçando e não desista!' }</FeedbackText>
         <FeedBackImage source={isSuccessFeedback ? FeedbackSuccessImg : FeedbackFailImg} />
-        <Button label='Voltar para página inicial' variant='contained' onPress={()=>{}}  />
+        <Button label='Voltar para página inicial' variant='contained' onPress={()=>navigate('home')}  />
 
     </FeedbackContainer>
   )

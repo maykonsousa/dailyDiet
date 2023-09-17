@@ -7,7 +7,10 @@ export declare global {
             dashboard: undefined;
             addmeal: undefined;
             feedback: {
-                meal_id: string;
+                is_meal_diet: 'yes' | 'no',
+            }
+            detail: {
+                id: string;
             }
          
         }

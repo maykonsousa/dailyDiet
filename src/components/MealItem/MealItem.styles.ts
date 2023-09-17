@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import styled, {css} from "styled-components/native";
 
 interface IndicatorProps {
-    healthy: boolean;
+    healthy: 'yes' | 'no' | null;
 }
 
 export const MeaItemContainer = styled(TouchableOpacity)`
@@ -51,7 +51,7 @@ export const MeaItemContainer = styled(TouchableOpacity)`
     `;
 
     export const HealthIndicator = styled(Circle).attrs<IndicatorProps>(({theme, healthy}) => ({
-        color: healthy ? theme.colors["green-mid"] : theme.colors["red-mid"],
+        color: healthy==='yes' ? theme.colors["green-mid"] : theme.colors["red-mid"],
         size: 16,
         weight: "fill",
     }))``;

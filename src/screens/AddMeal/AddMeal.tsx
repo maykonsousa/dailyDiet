@@ -7,15 +7,10 @@ import { InputDate } from '@components/InputDate';
 import { InputHour } from '@components/InputHour';
 import { Checkbox } from '@components/Checkbox';
 import { Button } from '@components/Button';
+import { CreateMeal } from '@storage/CreateMeal.service';
+import { MealIputDTO } from '@storage/DTOs';
 
-interface IFormValues {
-    name: string;
-    description: string;
-    date: string,
-    hour: string,
-    onHealthyDiet: 'yes' | 'no' | null,
 
-}
 
 interface IErrors {
     name?: string;
@@ -27,7 +22,7 @@ interface IErrors {
 
 }
 
-const InitialFormValues:IFormValues = {
+const InitialFormValues:MealIputDTO = {
     name: '',
     description: '',
     date: '',
@@ -47,13 +42,13 @@ const InitialErrors:IErrors = {
 
 
 export const AddMeal = () => {
-  const [formValues, setFormValues] = React.useState<IFormValues>(InitialFormValues)
+  const [formValues, setFormValues] = React.useState<MealIputDTO>(InitialFormValues)
   const [errors, setErrors] = React.useState<IErrors>(InitialErrors)
 
   
   
 
-  const handleChanges = (value: string, name: keyof IFormValues) => {
+  const handleChanges = (value: string, name: keyof MealIputDTO) => {
       setFormValues({...formValues, [name]: value})
   }
 
@@ -75,8 +70,31 @@ export const AddMeal = () => {
     if(!formValues.onHealthyDiet) {
         newErrors.onHealthyDiet = 'Escolha uma opção'
     }
-    setErrors(newErrors)
+    if(Object.keys(newErrors).length === 0){
+        setErrors(InitialErrors)
+        return false
+
+    }else {
+        setErrors(newErrors)
+        return true
+    }
   }
+
+  const handleSubmmit = async() => {
+    if (ValidateForm()) return
+    
+      try {
+        await CreateMeal(formValues)
+         navigate('feedback', {is_meal_diet:formValues.onHealthyDiet as 'yes' | 'no'})
+        setErrors(InitialErrors)
+        setFormValues(InitialFormValues)
+
+      } catch (error) {
+        console.log(error)    
+      }  
+      
+    }
+  
 
 
   const {navigate} = useNavigation()
@@ -164,12 +182,7 @@ export const AddMeal = () => {
             <Button 
             variant='contained'
             label="Cadastrar refeição" 
-            onPress={()=>{
-                ValidateForm()
-                console.log(formValues)
-                console.log({errors})
-                navigate('feedback', {meal_id:'12345'})
-            }} 
+            onPress={handleSubmmit} 
             />
 
             

@@ -1,0 +1,1 @@
+export const  MEAL_COLLECTION = "@daily_diet:meals";

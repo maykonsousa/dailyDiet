@@ -4,11 +4,10 @@ import styled, {css} from "styled-components/native";
 
 export const ResumeContainer = styled.View`
     width: 100%;
-    padding: 20px 16px;
+    padding: 20px 24px;
     position: relative;
     align-items: center;
     justify-content: center;
-    padding: 24px;
 
 
 `;
@@ -34,7 +33,7 @@ export const ResumeDescription = styled.Text`
 export const BackButton = styled.TouchableOpacity`
     position: absolute;
     top: 0;
-    left: 0;
+    left: 16px;
     align-items: center;
     justify-content: center;
     padding: 10px;
