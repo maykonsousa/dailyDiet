@@ -12,6 +12,10 @@ export declare global {
             detail: {
                 id: string;
             }
+            editmeal: {
+                id: string;
+            }
+        
          
         }
     }
