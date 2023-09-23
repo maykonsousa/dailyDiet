@@ -5,17 +5,19 @@ import { FlatList } from 'react-native'
 interface OptionsSelectProps {
   value: string;
   label: string;
+  
 }
 
 interface SelectProps {
   options: OptionsSelectProps[];
   onChange: (value: string) => void;
+  placeholder?: string;
 }
 
-export const Select = ({onChange, options}:SelectProps) => {
+export const Select = ({onChange, options, placeholder}:SelectProps) => {
   
   const [show, setShow] = React.useState(false)
-  const [option, setOption] = React.useState<string>('')
+  const [option, setOption] = React.useState<string>(``)
 
  
 
@@ -38,13 +40,13 @@ export const Select = ({onChange, options}:SelectProps) => {
   }
 
   React.useEffect(()=>{
-    if(options.length > 0 && !option) setOption(options[0].label)
+    if(options.length > 0 ) setOption(options[0].label)
 
   },[options])
   return (
     <>
     <SelectInput onPress={handleOpenModal}>
-        <SelectText>{option}</SelectText>
+        <SelectText>{option ? option : placeholder}</SelectText>
         <SelectIcon />
     </SelectInput>
     <OptionsModal

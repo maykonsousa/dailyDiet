@@ -136,6 +136,7 @@ export const AddMeal = () => {
                   isRequired
                   onChangeText={(value)=>handleChanges(value, 'date')}
                   value={formValues.date}
+                  placeholder='dd/mm/aaaa'
                 />
                
 
@@ -148,6 +149,7 @@ export const AddMeal = () => {
                   isRequired
                   onChangeText={(value)=>handleChanges(value, 'hour')}
                   value={formValues.hour}
+                  placeholder='hh:mm'
                />
 
             </GridItemContainer>

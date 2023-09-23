@@ -1,23 +1,38 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { ResumeContainer, ResumeDescription, ResumeTitle, DetailButton, DetailIcon } from './HomeResume.styles'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { ResumeDTO } from '@storage/DTOs'
+import { getResume } from '@storage/getResume.service'
 
 
-interface HomeResumeProps {
-  percentageMealsDiet: number;
-}
 
-export const HomeResume = ({percentageMealsDiet }:HomeResumeProps) => {
+
+export const HomeResume = () => {
     const {navigate} = useNavigation()
-    const isSuccess = percentageMealsDiet >= 50
-  
+    const [resume, setResume] = React.useState<ResumeDTO>({} as ResumeDTO)
+    const isSuccess = resume.percentageMealsDiet >= 50
+    
+    const getResumeData = async() => {
+      try {
+        const resumeData = await getResume()
+        setResume(resumeData)
+      } catch (error) {
+        console.log(error)
+      }
+   }
+
+   useFocusEffect(useCallback(()=>{
+    getResumeData()
+   },[]))
   return (
-    <ResumeContainer isSuccess={isSuccess}>
+    resume.percentageMealsDiet ? (
+      <ResumeContainer isSuccess={isSuccess}>
         <DetailButton onPress={()=>navigate("dashboard")}>
             <DetailIcon />
         </DetailButton>
-        <ResumeTitle>{`${percentageMealsDiet}%`}</ResumeTitle>
+        <ResumeTitle>{`${resume.percentageMealsDiet}%`}</ResumeTitle>
         <ResumeDescription>das refeições dentro da dieta</ResumeDescription>
     </ResumeContainer>
+    ):null
   )
 }

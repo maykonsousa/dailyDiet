@@ -30,7 +30,6 @@ export const SelectText = styled.Text`
 
 
     export const OptionsModal = styled(Modal)`
-    background-color: red;
     `;
 
     export const Overlay = styled.View`
