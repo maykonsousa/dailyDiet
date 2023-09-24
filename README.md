@@ -55,7 +55,7 @@ npm run android
 [NodeJS](https://nodejs.org/en/download)  
 [Expo](https://expo.dev/)  
 [Android Studio](https://developer.android.com/studio/install?hl=pt-br)  
-[Figma do projeto](https://www.figma.com/file/9oFvFCof9KMaxDsH9IhPjg/ToDo-List-%E2%80%A2-Mobile)
+[Figma do projeto](https://www.figma.com/file/a6xgOWquIkMW90LtLlWjtE/Daily-Diet-%E2%80%A2-Desafio-React-Native)
 
 
 ## 🧑‍💻 Maykon Sousa

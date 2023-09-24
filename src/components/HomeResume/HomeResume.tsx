@@ -25,7 +25,7 @@ export const HomeResume = () => {
     getResumeData()
    },[]))
   return (
-    resume.percentageMealsDiet ? (
+   
       <ResumeContainer isSuccess={isSuccess}>
         <DetailButton onPress={()=>navigate("dashboard")}>
             <DetailIcon />
@@ -33,6 +33,6 @@ export const HomeResume = () => {
         <ResumeTitle>{`${resume.percentageMealsDiet}%`}</ResumeTitle>
         <ResumeDescription>das refeições dentro da dieta</ResumeDescription>
     </ResumeContainer>
-    ):null
+    
   )
 }
